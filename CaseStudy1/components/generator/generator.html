@@ -1,0 +1,91 @@
+﻿<div class="container">
+    <div class="text-center">
+        <img src="../../img/logo.jpg" height="50" width="50" />
+        - Gear Generator
+    </div>
+    <form name="generatorForm" novalidate>
+        <div class="panel">
+            <div class="text-center col-lg-12 col-sm-12 col-xs-12 panel-black-heading">
+                Purchase Order Generator
+            </div>
+            <div class="panel-body xsmall">
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-xs-2 col-lg-6 text-right" style="padding:0;">Vendor:</div>
+                    <div class="col-xs-3 col-lg-6 text-left" style="color:black; padding:0;">
+                        <select name="vendorno" required ng-model="generator.vendor"
+                                ng-options="vendor as vendor.name for vendor in generator.vendors"
+                                ng-change="generator.getProducts()"></select>
+                        <div ng-messages="generatorForm.vendorno.$error">
+                            <div ng-message="required" class="col-xs-12 custom-error">Choose a vendor!</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-lg-6 text-right" style="padding:0;" ng-show="generator.pickedVendor">Products:</div>
+                    <div class="col-xs-3 col-lg-6 text-left" style="color:black; padding:0;" ng-show="generator.pickedVendor">
+                        <select name="product" required ng-model="generator.product"
+                                ng-options="product as product.productname for product in generator.products"></select>
+                        <div ng-messages="generatorForm.product.$error">
+                            <div ng-message="required" class="col-xs-12 custom-error">Choose a product!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="generator.pickedVendor" style="margin-top:30px;">
+                    <div class="col-xs-2 col-lg-6 text-right" style="padding:0;">Qty:</div>
+                    <div class="col-xs-3 col-lg-6 text-left">
+                        <select class="input-small" ng-model="generator.quantity" id="qty" name="qty" required>
+                            <option value="EOQ">EOQ</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <div ng-messages="generatorForm.qty.$error">
+                            <div ng-message="required" class="col-xs-12 custom-error">Choose a qty!</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-lg-1">
+                        <button class="btn btn-default" ng-click="generator.addItem()" style="width:150px" ng-disabled="generatorForm.$invalid">Add</button>
+                    </div>
+                </div>
+                <div class="row" ng-show="generator.cartHasItem">
+                    <div class="col-xs-12 col-lg-12 col-sm-12 text-center panel-black-heading" style="margin-top:15px;">
+                        <div class="col-xs-4 col-lg-4 col-sm-4 text-right">Product</div>
+                        <div class="col-xs-4 col-lg-4 col-sm-4 text-right">Qty</div>
+                        <div class="col-xs-4 col-lg-4 col-sm-4 text-right">Ext Price</div>
+                    </div>
+                    <div class="col-xs-12 col-lg-12 col-sm-12" ng-repeat="ci in generator.poCart">
+                        <div ng-if="ci.qty > 0" class="poRow">
+                            <div class="col-xs-4 col-lg-4 col-sm-4 text-right">{{ci.productname}}</div>
+                            <div class="col-xs-4 col-lg-4 col-sm-4 text-right">{{ci.qty}}</div>
+                            <div class="col-xs-4 col-lg-4 col-sm-4 text-right">{{ci.ext | currency}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="generator.cartHasItem">
+                    <div class="row totalRows">
+                        <div class="col-xs-8 col-lg-8 col-sm-8 text-right">Subtotal:</div>
+                        <div class="col-xs-4 col-lg-8 col-sm-8 text-center">{{generator.subtotal | currency}}</div>
+                    </div>
+                    <div class="row totalRows">
+                        <div class="col-xs-8 col-lg-8 col-sm-8 text-right">Tax:</div>
+                        <div class="col-xs-4 col-lg-8 col-sm-8 text-center">{{generator.tax | currency}}</div>
+                    </div>
+                    <div class="row totalRows">
+                        <div class="col-xs-8 col-lg-8 col-sm-8 text-right">Total:</div>
+                        <div class="col-xs-4 col-lg-8 col-sm-8 text-center">{{generator.total | currency}}</div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-sm-12 col-xs-12 text-center label label-default" style="font-size:x-small; padding-top:15px; padding-bottom:15px; margin-top:15px;">
+                    {{generator.status}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-xs-offset-4" ng-show="generator.cartHasItem">
+            <button class="btn btn-info col-xs-5" type="button" ng-click="generator.createPO()">Create PO</button>
+        </div>
+        <div ng-show="generator.poGenerated && !generator.cartHasItem" class="row col-xs-offset-4">
+            <button class="btn btn-info col-xs-5" type="button" ng-click="generator.viewPdf()">Get PDF</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,115 @@
+﻿<form name="productForm" novalidate>
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="ctrlr.cancel()">&times;</button>
+        <h4 class="modal-title">{{ctrlr.modalTitle}}</h4>
+    </div>
+    <div class="modal-body xsmall">
+        <div class="panel">
+            <div class="panel-black-heading text-center">
+                Product Information
+                <button type="button" class="pull-right panel-black" ng-click="productCollapsed = !productCollapsed;">
+                    <span ng-show="productCollapsed" class="glyphicon glyphicon-chevron-right"></span>
+                    <span ng-show="!productCollapsed" class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+            </div>
+            <div class="panel-body xsmall" ng-class="{true: 'collapse'}[productCollapsed]">
+                <div class="col-xs-3 col-lg-6 text-right">Vendor:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <select name="vendorno" required ng-model="ctrlr.product.vendorno"
+                            ng-options="v.vendorno as v.name for v in ctrlr.vendors"></select>
+                </div>
+                <div ng-messages="productForm.vendorno.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Choose a vendor!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Code:</div>
+                <div class="col-xs-8 col-lg-6 text-left" ng-show="ctrlr.todo === 'add'">
+                    <input required type="text" ng-model="ctrlr.product.productcode" name="productCode" />
+                </div>
+                <div class="col-xs-8 col-lg-6 text-left" ng-hide="ctrlr.todo === 'add'">
+                    {{ctrlr.product.productcode}}
+                </div>
+                <div ng-messages="productForm.productCode.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Product Code required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">SKU:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="text" ng-model="ctrlr.product.vendorsku" name="productSKU"/>
+                </div>
+                <div ng-messages="productForm.productSKU.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Vendor SKU required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Name:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="text" ng-model="ctrlr.product.productname" name="productName" />
+                </div>
+                <div ng-messages="productForm.productName.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Product Name required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Cost:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number"  class="text-right" ng-model="ctrlr.product.costprice" name="productCost"
+                           value="{product.costprice}|currenct:'$'" />
+                </div>
+                <div ng-messages="productForm.productCost.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Product Cost required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">MSRP:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number" class="text-right" ng-model="ctrlr.product.msrp" name="productMsrp"
+                           value="{product.msrp}|currenct:'$'" />
+                </div>
+                <div ng-messages="productForm.productMsrp.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Product MSRP required!</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-black-heading text-center">
+                Inventory Information
+                <button type="button" class="pull-right panel-black" ng-click="inventoryCollapsed = !inventoryCollapsed;">
+                    <span ng-show="inventoryCollapsed" class="glyphicon glyphicon-chevron-right"></span>
+                    <span ng-show="!inventoryCollapsed" class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+            </div>
+            <div class="panel-body xsmall" ng-class="{true: 'collapse'}[inventoryCollapsed]">
+                <div class="col-xs-3 col-lg-6 text-right">ROP:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number" class="text-right" ng-model="ctrlr.product.rop" name="productROP" />
+                </div>
+                <div ng-messages="productForm.productROP.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">ROP required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">EOQ:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number" class="text-right" ng-model="ctrlr.product.eoq" name="productEOQ" />
+                </div>
+                <div ng-messages="productForm.productEOQ.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">EOQ required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">QOH:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number" class="text-right" ng-model="ctrlr.product.qoh" name="productQOH" />
+                </div>
+                <div ng-messages="productForm.productQOH.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">QOH required!</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">QOO:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="number" class="text-right" ng-model="ctrlr.product.qoo" name="productQOO" />
+                </div>
+                <div ng-messages="productForm.productQOO.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">QOO required!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer top10pad">
+        <img src="../../img/logo.jpg" height="75" width="75" style="float:left; margin-left:25px;" />
+        <button type="button" class="btn panel-black" ng-click="(ctrlr.todo === 'add') ? ctrlr.add() : ctrlr.update()"
+                ng-disabled="productForm.$invalid">{{ctrlr.todo}}</button>
+        <span ng-hide="ctrlr.todo === 'add'">
+            <button type="button" class="btn panel-black" confirm-click ng-click="ctrlr.delete()">delete</button>
+        </span>
+        <button type="button" class="btn panel-black" ng-click="ctrlr.cancel()">cancel</button>
+    </div>
+</form>

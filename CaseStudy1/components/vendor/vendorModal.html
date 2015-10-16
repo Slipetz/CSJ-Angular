@@ -1,0 +1,94 @@
+﻿<form name="vendorForm">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="ctrlr.cancel()">&times;</button>
+        <h4 class="modal-title">{{ctrlr.modalTitle}}</h4>
+    </div>
+    <div class="modal-body xsmall vendors">
+        <div class="panel">
+            <div class="panel-heading xsmall panel-black text-center">Vendor Information</div>
+            <div class="panel-body xsmall">
+                <div class="col-xs-3 col-lg-6 text-right">Name:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="text" ng-model="ctrlr.vendor.name" name="vendorName" />
+                </div>
+                <div ng-messages="vendorForm.vendorName.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Name is required</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Address:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="text" ng-model="ctrlr.vendor.address1" name="vendorAddress1" />
+                </div>
+                <div ng-messages="vendorForm.vendorAddress1.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Address is required</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">City:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="text" ng-model="ctrlr.vendor.city" name="vendorCity" />
+                </div>
+                <div ng-messages="vendorForm.vendorCity.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">City is required</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Postal:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input size="10" required type="text" ng-model="ctrlr.vendor.postalcode" name="vendorPostalCode"
+                           ng-pattern="/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/" />
+                </div>
+                <div ng-messages="vendorForm.vendorPostalCode.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Postal Code is required</div>
+                    <div ng-message="pattern" class="col-xs-12 custom-error">Invalid Postal Code</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Phone:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="tel" ng-model="ctrlr.vendor.phone" name="vendorPhone" />
+                </div>
+                <div ng-messages="vendorForm.vendorPhone.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Phone No is required</div>
+                </div>
+                
+                <div ng-messages="vendorForm.vendorType.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Type is required</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Email:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <input required type="email" ng-model="ctrlr.vendor.email" name="employeeEmail" />
+                </div>
+                <div ng-messages="vendorForm.employeeEmail.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Email is required</div>
+                    <div ng-message="email" class="col-xs-12 custom-error">Email is invalid</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Province:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <select ng-model="ctrlr.vendor.province" ng-init="ctrlr.vendor.province = ctrlr.vendor.province || 'ON'" class="input-small">
+                        <option value="ON">Ontario</option>
+                        <option value="QU">Quebec</option>
+                        <option value="AB">Alberta</option>
+                    </select>
+                </div>
+                <div ng-messages="vendorForm.vendorProvince.$error">
+                    <div ng-message="required" class="col-xs-12 custom-error">Province is required</div>
+                </div>
+                <div class="col-xs-3 col-lg-6 text-right">Type:</div>
+                <div class="col-xs-8 col-lg-6 text-left">
+                    <select ng-model="ctrlr.vendor.vendortype" ng-init="ctrlr.vendor.vendortype = ctrlr.vendor.vendortype || 'Trusted'" class="input-small">
+                        <option value="Trusted">Trusted</option>
+                        <option value="Not Trusted">Not Trusted</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer top10pad">
+        <img src="../../img/logo.jpg" height="75" width="75"style="float:left; margin-left:25px;"/>
+        <div class="col-xs-12 text-right">
+            <button type="button" class="btn panel-black" ng-click="(ctrlr.todo ==='Add') ? ctrlr.add() : ctrlr.update()"
+                    ng-disabled="vendorForm.$invalid">
+                {{ctrlr.todo}}
+            </button>
+            <span ng-hide="ctrlr.todo === 'Add'">
+                <button type="button" class="btn panel-black" ng-click="ctrlr.delete()" confirm-click>Delete</button>
+            </span>
+            <button type="button" class="btn btn-default" ng-click="ctrlr.cancel()">Cancel</button>
+        </div>
+    </div>
+</form>

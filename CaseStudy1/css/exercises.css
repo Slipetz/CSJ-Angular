@@ -1,0 +1,11 @@
+﻿html, body {font-family: 'Roboto Condensed', sans-serif !important;}
+.rowGray {background-color: #205B5E; color:white; height:45px;}
+.rowWhite {background-color: #018B91; color:white; height:45px}
+.panel { border: 1px solid #244446; }
+.panel-black {background-color: #244446; color: white;}
+.panel-black-heading {background-color: #244446; color:white; padding: 5px;}
+.itemSelected {font-weight:bold; font-size: 14px; color: black; background-color:yellow;}
+.custom-error {font-size: x-small; font-weight:bold; color:red; text-align:left;}
+.snap-content {background-color: #fff; border-left: 1px solid #ccc;}
+.poRow {padding-top: 5px; padding-bottom: 5px;}
+.totalRows {border-bottom: 1px solid lightgray;}
